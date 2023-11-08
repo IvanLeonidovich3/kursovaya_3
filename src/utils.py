@@ -1,4 +1,5 @@
 import json
+from typing import Any
 
 
 #  14.10.2018
@@ -9,7 +10,7 @@ def load_operation():
     return data  # список всех операций из json файла
 
 
-def sort_date(date):
+def sort_date(date: Any) -> list:
     """сортирует список операций по дате"""
     sort_list = sorted(date, key=lambda x: x['date'], reverse=True)
     return sort_list  # список остортированных по дате операций
