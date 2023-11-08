@@ -9,30 +9,18 @@ def load_operation():
     return data  # список всех операций из json файла
 
 
-def empty_operation():
-    """проверка на пустой список"""
-    len_list = []
-    for k in load_operation():  # убераю пустой список
-        if len(k) > 0:
-            len_list.append(k)
-    return len_list  # список всех не пустых операций
-
-
-date = empty_operation()  # чистая перменная без пустых операций
-
-
-def sort_date():
+def sort_date(date):
     """сортирует список операций по дате"""
     sort_list = sorted(date, key=lambda x: x['date'], reverse=True)
     return sort_list  # список остортированных по дате операций
 
 
-def executed_operations():
+def executed_operations(operations: list) -> list:
     """сортирует список операций выполненные по ключу EXECUTED"""
     executed_list = []
-    for execut in date:
-        if execut["state"] == 'EXECUTED':
-            executed_list.append(execut)
-    return executed_list[:5]  # список выполненных операций
+    for execut in operations:
+        if execut.get('state') is not None:
+            if execut["state"] == 'EXECUTED':
+                executed_list.append(execut)
 
-
+    return executed_list  # список выполненных операций
